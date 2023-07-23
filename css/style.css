@@ -1,0 +1,278 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap');
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 10px;
+    text-decoration: none;
+    list-style: none;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* GRID GERAL */
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas:
+        "header header header"
+        "article article aside"
+        "footer footer footer";
+}
+
+/* GRID HEADER */
+
+header {
+    display: grid;
+    grid-area: header;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    height: 100px;
+}
+
+header nav ul {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+header nav a {
+    display: block;
+    padding: 15px;
+    color: #000;
+}
+
+header nav a:hover {
+    color: #d94a3a;
+}
+
+
+/* GRID ARTICLE */
+
+
+article {
+    grid-area: article;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 5px;
+    width: 731px;
+}
+
+.col-wide {
+    grid-column: 1 / -1;
+}
+
+.descricao {
+    font-size: 1rem;
+}
+
+.text-left {
+    font-size: 4rem;
+    font-weight: 800;
+}
+
+button {
+    grid-column: 2 / -1;
+    letter-spacing: 5px;
+    background-color: #d94a3a;
+    color: #fff;
+    border: none;
+    width: 185px;
+    height: 48px;
+    cursor: pointer;
+    transition: ease-in-out 0.3s;
+}
+
+button:hover {
+    background-color: #1c1b3e;
+}
+
+article img {
+    width: 873px;
+    height: 420px;
+}
+
+.mobile {
+    display: none;
+}
+
+
+/* GRID ASIDE */
+aside {
+    grid-area: aside;
+    background-color: #1c1b3e;
+    color: #fff;
+    padding: 0 30px 0 21px;
+    height: auto;
+    width: 352px;
+}
+
+aside div h1 {
+    color: #e7ae62;
+    font-size: 40px;
+    padding-top: 30px;
+    margin-bottom: 30px;
+}
+
+aside p {
+    opacity: 60%;
+}
+
+aside h2 {
+    cursor: pointer;
+}
+
+aside h2:hover {
+    color: #e7ae62;
+}
+
+aside hr {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+/* GRID FOOTER */
+
+footer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+}
+
+footer>div {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+}
+
+footer p {
+    color: #000;
+    opacity: 60%;
+    font-size: 1rem;
+}
+
+footer h1 {
+    color: #c6c4c8;
+    font-size: 2.3rem;
+}
+
+footer h2 {
+    color: #1c1b3e;
+    font-size: 1.3rem;
+}
+
+#btn-mobile {
+    display: none;
+    align-items: center;
+    letter-spacing: normal;
+    padding: .3rem 1rem;
+    font-size: 1.3rem;
+    border: none;
+    width: auto;
+    background-color: #1c1b3e;
+    cursor: pointer;
+    gap: .5rem;
+    font-family: 'Inter', sans-serif;
+}
+
+#hamburguer {
+    border-top: 2px solid;
+    width: 20px;
+    display: block;
+}
+
+
+#hamburguer::after,
+#hamburguer::before {
+    content: '';
+    /* tenho que indicar alguma coisa, os pseudoelemento só aparecem com alguma coisa*/
+    display: block;
+    width: 20px;
+    height: 2px;
+    background-color: currentColor;
+    /* variável pra não precisar ficar trocando de cor dois elementos, troca direto no #hamburguer*/
+    margin-top: 5px;
+    transition: .3s;
+    position: relative;
+}
+
+header.active #hamburguer {
+    border-top-color: transparent;
+}
+
+header.active #hamburguer::after {
+    transform: rotate(-135deg);
+    top: -7px;
+}
+
+header.active #hamburguer::before {
+    transform: rotate(135deg);
+}
+
+
+@media (max-width: 620px) {
+    .container {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "header"
+            "article"
+            "aside"
+            "footer";
+    }
+
+    footer {
+        display: flex;
+        flex-direction: column;
+        max-width: 300px;
+    }
+
+    article {
+        display: flex;
+        flex-direction: column;
+        width: 352px;
+    }
+
+    .mobile {
+        display: block;
+        width: auto;
+        height: auto;
+    }
+
+    article img {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    #btn-mobile {
+        display: flex;
+
+    }
+
+    header nav ul {
+        display: block;
+        position: absolute;
+        width: 100%;
+        top: 100px;
+        right: 0px;
+        background-color: #e7e7e7;
+        height: 0px;
+        transition: 0.6s;
+        z-index: 1000;
+        visibility: hidden;
+        overflow-y: hidden;
+    }
+
+    header.active ul {
+        height: calc(100vh - 100px);
+        visibility: visible;
+        overflow-y: auto;
+    }
+
+    ul a {
+        border-bottom: 2px solid rgba(0, 0, 0, .05);
+    }
+}
